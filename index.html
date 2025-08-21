@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>veyora | E‑Book</title>
+  <title>veynora</title>
   <meta name="description" content="Sell the '40M+ Viral Reel Ideas + Best Dropshipping Tips' e‑book with 3 pricing plans, luxe design, gallery, FAQ, countdown, testimonials, trust badges, and sticky buy button." />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,8 +75,25 @@
     .card{position:relative;border-radius:var(--radius-lg);background:linear-gradient(180deg, #171b26, #11151e);border:1px solid rgba(255,255,255,.08);box-shadow: var(--shadow);overflow:hidden}
     .card .ribbon{position:absolute;top:16px;right:-40px;transform:rotate(35deg);background:linear-gradient(180deg, #f5e6b3, #d4af37);color:#121212;padding:8px 60px;font-weight:800;letter-spacing:.7px;box-shadow:0 10px 20px rgba(212,175,55,.3)}
     .card .inner{padding:24px}
-    .price{font-size:36px;font-weight:800;margin:12px 0 10px}
-    .del{color:#9aa3b1;text-decoration: line-through; font-size:14px}
+    
+    /* Price styling with original and discounted */
+    .price-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 12px 0 10px;
+    }
+    .original-price {
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .price {
+      font-size: 36px;
+      font-weight: 800;
+    }
+    
     ul.features{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
     ul.features li{display:flex;gap:10px;align-items:flex-start}
     .check{width:18px;height:18px;border-radius:50%;background: radial-gradient(circle at 30% 30%, #fff, var(--success));margin-top:4px;box-shadow:0 0 0 2px #0c1315}
@@ -147,6 +164,7 @@
       .brand h1 {font-size: 16px;}
       .card .inner {padding: 18px;}
       .price {font-size: 32px;}
+      .original-price {font-size: 14px;}
       .plan-image {max-width: 70%;}
     }
     
@@ -159,6 +177,7 @@
       .section {padding: 30px 0;}
       .card .inner {padding: 16px;}
       .price {font-size: 28px;}
+      .original-price {font-size: 12px;}
       .brand h1 {font-size: 14px;}
       .hero {padding: 30px 0 20px;}
       .trust .seal {padding: 10px 8px; font-size: 11px;}
@@ -187,9 +206,9 @@
   <header>
     <div class="container nav">
       <div class="brand">
-        <div class="brand-badge" aria-hidden="true"><span>VR</span></div>
-        <h1>Viral Reels + Dropshipping Pro</h1>
-      </div>
+        <div class="brand-badge" aria-hidden="true"><span>V</span></div>
+       <div class="brand-badge" aria-hidden="true"><span>V</span></div>
+        <h1>veyora</h1>
       <div class="cta">
         <a class="btn" href="#pricing">Pricing</a>
         <a class="btn primary" href="#buy" id="navBuy">Buy Now</a>
@@ -201,7 +220,7 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <h2 class="headline"><span class="glow">veyora</span> + start now by selecting a <span class="glow">Plan</span> on very low prices </h2>
+       <h2 class="headline"><span class="glow">veyora</span> + start now by selecting a <span class="glow">Plan</span> on very low prices </h2>
         <p class="sub">Steal my swipe‑file of proven engaging reels + a crisp, step‑by‑step dropshipping playbook. video editng tools , canva templests launch, scale — faster than your competition.</p>
         <div class="badges">
           <span class="chip">Instant Download (PDF)</span>
@@ -249,7 +268,10 @@
           <div class="inner">
             <img src="file/assets/annie.png" alt="Basic Plan" class="plan-image">
             <h3>Basic</h3>
-            <div class="price">₹29</div>
+            <div class="price-container">
+              <div class="original-price">₹1500</div>
+              <div class="price">₹29</div>
+            </div>
             <div class="muted">Just the e‑book. Start learning now.</div>
             <ul class="features">
               <li><span class="check"></span> 40M+ digial products </li>
@@ -265,11 +287,14 @@
 
         <!-- Advance -->
         <div class="card">
-          <div class="ribbon">BEST VALUE</div>
+          <div class="ribbon">popular</div>
           <div class="inner">
             <img src="file/assets/annie2.png" alt="advance" class="plan-image">
             <h3>Advance</h3>
-            <div class="price">₹59</div>
+            <div class="price-container">
+              <div class="original-price">₹1500</div>
+              <div class="price">₹59</div>
+            </div>
             <div class="muted">E‑book + Rights to Resell & Keep 100% Profit.</div>
             <ul class="features">
               <li><span class="check"></span> 40M+ digial products </li>
@@ -289,7 +314,10 @@
           <div class="inner">
             <img src="file/assets/annie3.png" alt="advance" class="plan-image">
             <h3>Premium</h3>
-            <div class="price">₹99</div>
+            <div class="price-container">
+              <div class="original-price">₹1500</div>
+              <div class="price">₹99</div>
+            </div>
             <div class="muted">Everything + bonus video series on how to resale for maximum conversions.</div>
             <ul class="features">
               <li><span class="check"></span>Everything in Advance</li>
@@ -364,7 +392,7 @@
       <h2>FAQs</h2>
       <details>
         <summary>What exactly am I getting in the Basic plan?</summary>
-        <div class="muted">You get the full PDF e‑book: 40M+ digital producs, captions, posting framework, and a step‑by‑step dropshipping starter blueprint.</div>
+        <div class="muted">You get the full PDF e‑book: 40M+ viral reel ideas, hooks, captions, posting framework, and a step‑by‑step dropshipping starter blueprint.</div>
       </details>
       <details>
         <summary>What are Resale Rights in the Advance plan?</summary>
@@ -372,7 +400,7 @@
       </details>
       <details>
         <summary>What’s extra in Premium?</summary>
-        <div class="muted">Everything in Advance plus premium bundle viral reels , pricing, payment links, and traffic to resell effectively.</div>
+        <div class="muted">Everything in Advance plus a video series showing how to set up pages, pricing, payment links, and traffic to resell effectively.</div>
       </details>
       <details>
         <summary>How do I get access after payment?</summary>
@@ -399,8 +427,8 @@
 
   <footer>
     <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div>© <span id="year"></span> Viral Reels + Dropshipping Pro</div>
-      <div class="muted">Terms • Privacy • Support: <a href="mailto:hello@example.com">hello@example.com</a></div>
+      <div>© <span id="year"></span> veynora</div>
+      <div class="muted">Terms • Privacy • Support: <a href="3muskuran@gmail.com">3muskuran@gmail.com</a></div>
     </div>
   </footer>
 
@@ -474,6 +502,4 @@
     });
   </script>
 </body>
-</html>`````````````````````````
-
-
+</html>
