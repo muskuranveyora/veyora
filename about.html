@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About - veyora</title>
+  <meta name="description" content="Learn more about veyora and our mission to help creators succeed." />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true"><span>V</span></div>
+        <h1>veyora</h1>
+      </div>
+      
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <div class="cta">
+        <a class="btn" href="index.html#pricing">Pricing</a>
+        <a class="btn primary" href="index.html#buy">Buy Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Content -->
+  <section class="section">
+    <div class="container">
+      <div class="page-content">
+        <h2>About Veyora</h2>
+        <p>Veyora was created to solve a common problem faced by digital creators and entrepreneurs: finding proven, engaging content and understanding the mechanics of successful digital storefronts.</p>
+        
+        <p>After analyzing thousands of successful reels and dropshipping stores, we've compiled the most effective strategies, hooks, and templates into our comprehensive packages.</p>
+        
+        <h3>Our Mission</h3>
+        <p>To provide creators and entrepreneurs with the tools they need to succeed in the competitive digital landscape, without the trial-and-error that costs time and money.</p>
+        
+        <h3>Why Choose Us</h3>
+        <ul class="features">
+          <li><span class="check"></span> Proven content that has already generated millions of views</li>
+          <li><span class="check"></span> Step-by-step guides that even beginners can follow</li>
+          <li><span class="check"></span> Continuous updates to keep up with algorithm changes</li>
+          <li><span class="check"></span> Responsive support to help you overcome challenges</li>
+        </ul>
+        
+        <div class="hero-card" style="margin-top: 30px;">
+          <h3>Our Story</h3>
+          <p>Founded in 2023, Veyora started as a small project to help friends grow their Instagram presence. As we developed winning strategies and collected high-performing content, we realized our methods could help many more people.</p>
+          <p>Today, we've helped over 5,000 creators and entrepreneurs launch successful online ventures through our proven systems and resources.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>© <span id="year"></span> veynora</div>
+      <div class="muted">•<a href="mailto:3muskuran@gmail.com">support: 3muskuran@gmail.com</a></div>
+       <div class="muted">•<a href="https://merchant.razorpay.com/policy/R631D1XEpyphGJ/terms">Privacy Policy</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
