@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact - veyora</title>
+  <meta name="description" content="Get in touch with the veyora team for support and inquiries." />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true"><span>V</span></div>
+        <h1>veyora</h1>
+      </div>
+      
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <div class="cta">
+        <a class="btn" href="index.html#pricing">Pricing</a>
+        <a class="btn primary" href="index.html#buy">Buy Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contact Content -->
+  <section class="section">
+    <div class="container">
+      <div class="page-content">
+        <h2>Contact Us</h2>
+        <p class="muted">Have questions or need support? We're here to help you succeed!</p>
+        
+        <div class="hero-card" style="margin-top: 30px;">
+          <h3>Get In Touch</h3>
+          <p>Whether you have questions about our products, need technical support, or want to share your success story, we'd love to hear from you.</p>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+            <div>
+              <h4>Contact Information</h4>
+              <ul class="features">
+                <li><strong>Email:</strong> <a href="mailto:3muskuran@gmail.com">3muskuran@gmail.com</a></li>
+                <li><strong>Response Time:</strong> Within 24 hours</li>
+                <li><strong>Support Hours:</strong> Mon-Sat, 10AM-6PM IST</li>
+              </ul>
+              
+              <h4 style="margin-top: 30px;">Follow Us</h4>
+              <div style="display: flex; gap: 15px; margin-top: 15px;">
+                <a href="#" class="btn">Instagram</a>
+                <a href="#" class="btn">YouTube</a>
+              </div>
+            </div>
+            
+            <div>
+              <h4>Send a Message</h4>
+              <form style="display: grid; gap: 15px; margin-top: 15px;">
+                <div>
+                  <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500;">Your Name</label>
+                  <input type="text" id="name" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text);">
+                </div>
+                
+                <div>
+                  <label for="email" style="display: block; margin-bottom: 5px; font-weight: 500;">Your Email</label>
+                  <input type="email" id="email" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text);">
+                </div>
+                
+                <div>
+                  <label for="message" style="display: block; margin-bottom: 5px; font-weight: 500;">Your Message</label>
+                  <textarea id="message" rows="4" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text);"></textarea>
+                </div>
+                
+                <button type="submit" class="btn primary" style="justify-self: start;">Send Message</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hero-card" style="margin-top: 40px;">
+          <h3>Common Support Topics</h3>
+          <p>Before contacting us, you might find quick answers to these common topics:</p>
+          
+          <ul class="features">
+            <li><strong>Access issues:</strong> Check your email for the download link, including spam folder</li>
+            <li><strong>Payment questions:</strong> We accept various payment methods including UPI, cards, and wallets</li>
+            <li><strong>Product guidance:</strong> Check our FAQ page for detailed usage instructions</li>
+            <li><strong>Technical problems:</strong> Make sure you have a stable internet connection and updated browser</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>© <span id="year"></span> veynora</div>
+      <div class="muted">•<a href="mailto:3muskuran@gmail.com">support: 3muskuran@gmail.com</a></div>
+       <div class="muted">•<a href="https://merchant.razorpay.com/policy/R631D1XEpyphGJ/terms">Privacy Policy</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
