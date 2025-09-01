@@ -8,7 +8,82 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+   <link rel="stylesheet" href="styles.css">
+   <style>
+     /* Additional styles for form enhancements */
+     .form-group {
+       margin-bottom: 20px;
+     }
+     
+     label {
+       display: block;
+       margin-bottom: 8px;
+       font-weight: 500;
+       color: var(--text);
+     }
+     
+     input, textarea {
+       width: 100%;
+       padding: 12px 16px;
+       border-radius: 12px;
+       border: 1px solid rgba(255, 255, 255, 0.1);
+       background: rgba(15, 17, 21, 0.5);
+       color: var(--text);
+       font-family: inherit;
+       transition: all 0.3s ease;
+     }
+     
+     input:focus, textarea:focus {
+       outline: none;
+       border-color: var(--gold);
+       box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+     }
+     
+     .success-message {
+       display: none;
+       background: rgba(49, 208, 170, 0.15);
+       border: 1px solid rgba(49, 208, 170, 0.3);
+       border-radius: 12px;
+       padding: 16px;
+       margin-top: 20px;
+       text-align: center;
+       color: #31d0aa;
+     }
+     
+     .error-message {
+       color: var(--danger);
+       font-size: 14px;
+       margin-top: 5px;
+       display: none;
+     }
+     
+     input.error, textarea.error {
+       border-color: var(--danger);
+     }
+     
+     .loading {
+       display: inline-block;
+       width: 20px;
+       height: 20px;
+       border: 3px solid rgba(255,255,255,.3);
+       border-radius: 50%;
+       border-top-color: #fff;
+       animation: spin 1s ease-in-out infinite;
+       margin-right: 10px;
+       vertical-align: middle;
+     }
+     
+     @keyframes spin {
+       to { transform: rotate(360deg); }
+     }
+     
+     @media (max-width: 768px) {
+       .contact-grid {
+         grid-template-columns: 1fr !important;
+         gap: 20px !important;
+       }
+     }
+   </style>
 </head>
 <body>
   <!-- Header -->
@@ -48,7 +123,7 @@
           <h3>Get In Touch</h3>
           <p>Whether you have questions about our products, need technical support, or want to share your success story, we'd love to hear from you.</p>
           
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+          <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
             <div>
               <h4>Contact Information</h4>
               <ul class="features">
@@ -66,24 +141,33 @@
             
             <div>
               <h4>Send a Message</h4>
-              <form style="display: grid; gap: 15px; margin-top: 15px;">
-                <div>
-                  <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500;">Your Name</label>
-                  <input type="text" id="name" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text);">
+              <!-- FormSpree Form -->
+              <form id="complaintForm" action="https://formspree.io/f/mrbalrpn" method="POST">
+                <div class="form-group">
+                  <label for="name">Your Name</label>
+                  <input type="text" id="name" name="name" required>
+                  <div class="error-message" id="nameError">Please enter your name</div>
                 </div>
                 
-                <div>
-                  <label for="email" style="display: block; margin-bottom: 5px; font-weight: 500;">Your Email</label>
-                  <input type="email" id="email" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text);">
+                <div class="form-group">
+                  <label for="email">Your Email</label>
+                  <input type="email" id="email" name="email" required>
+                  <div class="error-message" id="emailError">Please enter a valid email address</div>
                 </div>
                 
-                <div>
-                  <label for="message" style="display: block; margin-bottom: 5px; font-weight: 500;">Your Message</label>
-                  <textarea id="message" rows="4" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text);"></textarea>
+                <div class="form-group">
+                  <label for="message">Your Message</label>
+                  <textarea id="message" name="message" rows="4" required></textarea>
+                  <div class="error-message" id="messageError">Please enter your message</div>
                 </div>
                 
-                <button type="submit" class="btn primary" style="justify-self: start;">Send Message</button>
+                <button type="submit" class="btn primary" id="submitBtn" style="justify-self: start;">
+                  Send Message
+                </button>
               </form>
+              <div id="successMessage" class="success-message">
+                Thank you for your message! We'll get back to you soon.
+              </div>
             </div>
           </div>
         </div>
@@ -105,7 +189,7 @@
 
   <footer>
     <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div>© <span id="year"></span> veynora</div>
+      <div>© <span id="year"></span> veyora</div>
       <div class="muted">•<a href="mailto:3muskuran@gmail.com">support: 3muskuran@gmail.com</a></div>
        <div class="muted">•<a href="https://merchant.razorpay.com/policy/R631D1XEpyphGJ/terms">Privacy Policy</a></div>
     </div>
@@ -114,6 +198,84 @@
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Form submission handler with Formspree integration
+    document.getElementById('complaintForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      let isValid = true;
+      
+      // Reset error states
+      document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('error'));
+      
+      // Validate name
+      if (!name) {
+        document.getElementById('nameError').style.display = 'block';
+        document.getElementById('name').classList.add('error');
+        isValid = false;
+      }
+      
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        document.getElementById('emailError').style.display = 'block';
+        document.getElementById('email').classList.add('error');
+        isValid = false;
+      }
+      
+      // Validate message
+      if (!message) {
+        document.getElementById('messageError').style.display = 'block';
+        document.getElementById('message').classList.add('error');
+        isValid = false;
+      }
+      
+      if (!isValid) return;
+      
+      // Show loading state
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.innerHTML = '<span class="loading"></span> Sending...';
+      submitBtn.disabled = true;
+      
+      try {
+        // Submit to Formspree
+        const formData = new FormData(this);
+        const response = await fetch(this.action, {
+          method: this.method,
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          // Show success message
+          const successMessage = document.getElementById('successMessage');
+          successMessage.style.display = 'block';
+          
+          // Reset form
+          this.reset();
+          
+          // Hide success message after 5 seconds
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 5000);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        alert('There was a problem sending your message. Please try again or email us directly at 3muskuran@gmail.com');
+      } finally {
+        // Reset button state
+        submitBtn.innerHTML = 'Send Message';
+        submitBtn.disabled = false;
+      }
+    });
   </script>
 </body>
 </html>
