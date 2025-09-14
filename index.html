@@ -25,6 +25,7 @@
         --radius: 18px;
         --radius-lg: 26px;
         --maxw: 1200px;
+        --header-height: 70px;
     }
 
     * {
@@ -41,6 +42,8 @@
         font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
         line-height: 1.6;
         min-height: 100vh;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
     }
 
     a {
@@ -72,6 +75,9 @@
         transform: translateY(0);
         transition: transform 0.3s ease;
         will-change: transform;
+        height: var(--header-height);
+        display: flex;
+        align-items: center;
     }
     
     header.header-hidden {
@@ -84,6 +90,7 @@
         justify-content: space-between;
         gap: 16px;
         flex-wrap: wrap;
+        width: 100%;
     }
 
     .brand {
@@ -100,6 +107,15 @@
         display: grid;
         place-items: center;
         box-shadow: inset 0 0 12px #0008, 0 6px 16px #0008;
+        animation: rotateGradient 8s linear infinite;
+    }
+
+    @keyframes rotateGradient {
+        0% { background: conic-gradient(from 200deg, var(--gold), #fff3, var(--gold), #0000 60%); }
+        25% { background: conic-gradient(from 290deg, var(--gold), #fff3, var(--gold), #0000 60%); }
+        50% { background: conic-gradient(from 380deg, var(--gold), #fff3, var(--gold), #0000 60%); }
+        75% { background: conic-gradient(from 470deg, var(--gold), #fff3, var(--gold), #0000 60%); }
+        100% { background: conic-gradient(from 560deg, var(--gold), #fff3, var(--gold), #0000 60%); }
     }
 
     .brand-badge span {
@@ -166,16 +182,34 @@
         color: var(--gold-soft);
         font-weight: 600;
         box-shadow: var(--shadow);
-        transition: all .2s ease;
+        transition: all .3s ease;
         font-size: 14px;
         white-space: nowrap;
         cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: 0.5s;
+    }
+
+    .btn:hover::before {
+        left: 100%;
     }
 
     .btn:hover {
-        transform: translateY(-1px);
+        transform: translateY(-3px);
         border-color: var(--gold);
         color: #fff;
+        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
     }
 
     .btn.primary {
@@ -186,11 +220,23 @@
 
     .btn.primary:hover {
         filter: brightness(1.08);
+        transform: translateY(-3px) scale(1.05);
     }
 
     /* Hero */
     .hero {
         padding: 100px 0 28px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease forwards;
+        animation-delay: 0.3s;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .hero-grid {
@@ -236,6 +282,12 @@
         font-size: 13px;
         color: var(--gold-soft);
         background: linear-gradient(180deg, rgba(212,175,55,.12), rgba(212,175,55,.04));
+        transition: all 0.3s ease;
+    }
+
+    .chip:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(212,175,55,.2);
     }
 
     .hero-card {
@@ -244,6 +296,12 @@
         padding: 18px;
         border-radius: var(--radius-lg);
         box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+    }
+
+    .hero-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 60px rgba(0,0,0,.5);
     }
 
     .countdown {
@@ -267,6 +325,12 @@
         border-radius: 14px;
         padding: 12px 10px;
         text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .timebox:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(212,175,55,.2);
     }
 
     .timebox strong {
@@ -310,11 +374,25 @@
         text-align: center;
         font-size: 12px;
         color: #d6dce6;
+        transition: all 0.3s ease;
+    }
+
+    .trust .seal:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(255,255,255,.1);
     }
 
     /* Pricing */
     .section {
         padding: 40px 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease;
+    }
+
+    .section.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .section h2 {
@@ -343,10 +421,17 @@
         box-shadow: var(--shadow);
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .card.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-10px) scale(1.02);
         box-shadow: 0 25px 70px rgba(0,0,0,.45);
     }
 
@@ -361,6 +446,13 @@
         font-weight: 800;
         letter-spacing: .7px;
         box-shadow: 0 10px 20px rgba(212,175,55,.3);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 10px 20px rgba(212,175,55,.3); }
+        50% { box-shadow: 0 10px 30px rgba(212,175,55,.6); }
+        100% { box-shadow: 0 10px 20px rgba(212,175,55,.3); }
     }
 
     .card .inner {
@@ -413,6 +505,19 @@
         background: radial-gradient(circle at 30% 30%, #fff, var(--success));
         margin-top: 4px;
         box-shadow: 0 0 0 2px #0c1315;
+        position: relative;
+    }
+
+    .check::after {
+        content: '';
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 6px;
+        height: 3px;
+        border: solid #0c1315;
+        border-width: 0 0 2px 2px;
+        transform: rotate(-45deg);
     }
 
     .x {
@@ -422,6 +527,25 @@
         background: radial-gradient(circle at 30% 30%, #fff, var(--danger));
         margin-top: 4px;
         box-shadow: 0 0 0 2px #1a0c0c;
+        position: relative;
+    }
+
+    .x::before, .x::after {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 4px;
+        width: 10px;
+        height: 2px;
+        background: #1a0c0c;
+    }
+
+    .x::before {
+        transform: rotate(45deg);
+    }
+
+    .x::after {
+        transform: rotate(-45deg);
     }
 
     .card .cta {
@@ -433,6 +557,12 @@
         border: 1px solid rgba(212, 175, 55, 0.6);
         box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
         color: #121212;
+        animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
+        to { box-shadow: 0 0 40px rgba(212, 175, 55, 0.8); }
     }
 
     .bonus {
@@ -442,6 +572,13 @@
         border: 1px dashed rgba(212,175,55,.5);
         background: linear-gradient(180deg, rgba(212,175,55,.18), rgba(212,175,55,.06));
         color: #201a05;
+        animation: pulseGold 2s infinite;
+    }
+
+    @keyframes pulseGold {
+        0% { box-shadow: 0 0 0 rgba(212,175,55,.2); }
+        70% { box-shadow: 0 0 0 10px rgba(212,175,55,0); }
+        100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
     }
 
     /* Gallery */
@@ -455,10 +592,28 @@
         overflow: hidden;
         border-radius: 14px;
         transition: transform 0.3s ease;
+        position: relative;
+    }
+
+    .gal-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+
+    .gal-item:hover::before {
+        opacity: 1;
     }
 
     .gal-item:hover {
-        transform: scale(1.02);
+        transform: scale(1.05);
     }
 
     .gal-item img {
@@ -468,7 +623,7 @@
     }
 
     .gal-item:hover img {
-        transform: scale(1.05);
+        transform: scale(1.1);
     }
 
     /* Testimonials */
@@ -485,10 +640,17 @@
         border-radius: 16px;
         padding: 18px;
         transition: transform 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .tcard.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .tcard:hover {
-        transform: translateY(-5px);
+        transform: translateY(-5px) scale(1.02);
     }
 
     .tuser {
@@ -507,6 +669,11 @@
         place-items: center;
         color: #101010;
         font-weight: 800;
+        transition: all 0.3s ease;
+    }
+
+    .tcard:hover .avatar {
+        transform: scale(1.1) rotate(5deg);
     }
 
     /* FAQ */
@@ -522,6 +689,7 @@
         padding: 14px 16px;
         margin: 10px 0;
         transition: all 0.3s ease;
+        overflow: hidden;
     }
 
     details:hover {
@@ -532,6 +700,28 @@
         cursor: pointer;
         font-weight: 600;
         transition: color 0.3s ease;
+        position: relative;
+        padding-right: 30px;
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    summary::after {
+        content: '+';
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: var(--gold);
+        transition: all 0.3s ease;
+    }
+
+    details[open] summary::after {
+        content: '-';
+        transform: translateY(-50%) rotate(0deg);
     }
 
     summary:hover {
@@ -540,11 +730,21 @@
 
     details[open] {
         border-color: rgba(212,175,55,.45);
+        background: linear-gradient(180deg, #171c27, #111620);
     }
 
     details[open] summary {
         color: var(--gold);
         margin-bottom: 10px;
+    }
+
+    details .muted {
+        animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     /* Footer */
@@ -591,7 +791,7 @@
     }
 
     .card:hover .plan-image {
-        transform: scale(1.05);
+        transform: scale(1.08) rotate(2deg);
     }
 
     /* Page content styles */
@@ -814,7 +1014,7 @@
         
         .nav-menu {
             position: fixed;
-            top: 70px;
+            top: var(--header-height);
             left: 0;
             right: 0;
             background: rgba(11,11,12,.98);
@@ -827,6 +1027,7 @@
             visibility: hidden;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(212,175,55,.25);
+            z-index: 100;
         }
         
         .nav-menu.active {
@@ -991,8 +1192,8 @@
         <a class="btn primary" href="#buy">Buy Now</a>
       </div>
     </div>
+  </header>
 
-  <!-- Rest of your HTML remains exactly the same -->
   <!-- Main Content Area - SPA Pages -->
   <main>
     <!-- Home Page -->
@@ -1045,7 +1246,7 @@
           <p class="muted">Crystal‑clear pricing. Pick what fits your goal today — upgrade anytime.</p>
           <div class="pricing">
             <!-- Basic -->
-            <div class="card fade-in">
+            <div class="card">
               <div class="inner">
                 <img src="assets/annie.png" alt="Basic Plan" class="plan-image">
                 <h3>Basic</h3>
@@ -1067,7 +1268,7 @@
             </div>
 
             <!-- Advance -->
-            <div class="card fade-in">
+            <div class="card">
               <div class="ribbon">popular</div>
               <div class="inner">
                 <img src="assets/annie2.png" alt="advance" class="plan-image">
@@ -1091,7 +1292,7 @@
             </div>
 
             <!-- Premium -->
-            <div class="card premium fade-in">
+            <div class="card premium">
               <div class="inner">
                 <img src="assets/annie3.png" alt="advance" class="plan-image">
                 <h3>Premium</h3>
@@ -1123,10 +1324,10 @@
           <h2>Inside the E‑Book — Real Screens & Pages</h2>
           <p class="muted">See what you'll get with our comprehensive guide</p>
           <div class="gallery">
-            <div class="gal-item fade-in"><img src="assets/ss1.jpg" alt="Page preview 1"></div>
-            <div class="gal-item fade-in"><img src="assets/ss2.jpg" alt="Page preview 2"></div>
-            <div class="gal-item fade-in"><img src="assets/ss3.jpg" alt="Page preview 3"></div>
-            <div class="gal-item fade-in"><img src="assets/ss4.jpg" alt="Page preview 4"></div>
+            <div class="gal-item"><img src="assets/ss1.jpg" alt="Page preview 1"></div>
+            <div class="gal-item"><img src="assets/ss2.jpg" alt="Page preview 2"></div>
+            <div class="gal-item"><img src="assets/ss3.jpg" alt="Page preview 3"></div>
+            <div class="gal-item"><img src="assets/ss4.jpg" alt="Page preview 4"></div>
           </div>
         </div>
       </div>
@@ -1136,7 +1337,7 @@
         <div class="container">
           <h2>What Readers Say</h2>
           <div class="testimonials">
-            <div class="tcard fade-in">
+            <div class="tcard">
               <p>“Hooks are 🔥 — I posted 3 reels and jumped from 2k to 8.7k followers in a week. The dropshipping checklist saved me hours.”</p>
               <div class="tuser">
                 <div class="avatar">A</div>
@@ -1145,7 +1346,7 @@
                 </div>
               </div>
             </div>
-            <div class="tcard fade-in">
+            <div class="tcard">
               <p>“Bought premium for the training — literally plug‑and‑play. Resold 11 copies in 3 days. Gained more then 20k followers in just 12 days.”</p>
               <div class="tuser">
                 <div class="avatar">N</div>
@@ -1154,7 +1355,7 @@
                 </div>
               </div>
             </div>
-            <div class="tcard fade-in">
+            <div class="tcard">
               <p>“Zero fluff. The ad scripts + product research tips are gold. If you're starting, skip YouTube rabbit holes and get this.”</p>
               <div class="tuser">
                 <div class="avatar">M</div>
@@ -1175,58 +1376,58 @@
         <p class="muted">Find answers to common questions about veyora products and services</p>
         
         <div class="faq">
-          <details class="fade-in">
+          <details>
             <summary>What exactly am I getting in the Basic plan?</summary>
             <div class="muted">You get the full PDF of drive links for 30K+ 40M+ viral reels.</div>
           </details>
           
-          <details class="fade-in">
+          <details>
             <summary>What are Resale Rights in the Advance plan?</summary>
             <div class="muted">You're licensed to resell this e-book and keep 100% profit. You'll also receive editable assets to promote it and Instagram growth course (Do not falsely claim authorship).</div>
           </details>
           
-          <details class="fade-in">
+          <details>
             <summary>What's extra in Premium?</summary>
             <div class="muted">Everything in Advance plus a premium bundle viral reels (these reels have 50M+ views) it's easy to go viral with them, pricing, payment links, and traffic to resell effectively.</div>
           </details>
           
-          <details class="fade-in">
+          <details>
             <summary>How do I get access after payment?</summary>
             <div class="muted">You'll be redirected to an instant download page and also receive an email with your access link.</div>
           </details>
           
-          <details class="fade-in">
+          <details>
             <summary>What's your refund policy?</summary>
             <div class="muted">Digital products are non-refundable. If you have a technical issue, contact support and we'll fix access quickly (3muskuran@gmail.com).</div>
           </details>
           
-          <details class="fade-in">
+          <details>
             <summary>How often is the content updated?</summary>
             <div class="muted">We update our content library quarterly to ensure it remains relevant and effective with current trends and algorithm changes.</div>
           </details>
           
-          <details class="fade-in">
+          <details>
             <summary>Can I upgrade my plan later?</summary>
             <div class="muted">Yes, you can upgrade at any time. Just contact our support team and we'll help you with the upgrade process.</div>
           </details>
           
-          <details class="fade-in">
+          <details>
             <summary>Do I need any special software to use the templates?</summary>
             <div class="muted">Most of our templates are designed for Canva, which is free to use. Some video templates may require basic video editing software.</div>
           </details>
           
-          <details class="fade-in">
+          <details>
             <summary>Is there a limit to how many times I can use the content?</summary>
             <div class="muted">No, once you purchase a plan, you have unlimited use of all the content included in your package.</div>
           </details>
           
-          <details class="fade-in">
+          <details>
             <summary>How do I contact customer support?</summary>
             <div class="muted">You can reach our support team at 3muskuran@gmail.com. We typically respond within 24 hours.</div>
           </details>
         </div>
         
-        <div class="hero-card fade-in" style="margin-top: 40px;">
+        <div class="hero-card" style="margin-top: 40px;">
           <h3>Still Have Questions?</h3>
           <p>If you couldn't find the answer you're looking for, don't hesitate to reach out to our support team. We're here to help you succeed!</p>
           <div style="text-align: center; margin-top: 20px;">
@@ -1236,21 +1437,6 @@
       </div>
     </div>
   </section>
-
-  <footer>
-    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div>© <span id="year"></span> veynora</div>
-      <div class="muted">•<a href="mailto:3muskuran@gmail.com">support: 3muskuran@gmail.com</a></div>
-       <div class="muted">•<a href="https://merchant.razorpay.com/policy/R631D1XEpyphGJ/terms">Privacy Policy</a></div>
-    </div>
-  </footer>
-
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
 
       <!-- Footer / Buy Anchor -->
       <div class="section" id="buy">
@@ -1305,7 +1491,7 @@
             <p class="muted">Everything you need to succeed as a content creator or dropshipper</p>
             
             <div class="pricing">
-              <div class="card fade-in">
+              <div class="card">
                 <div class="inner">
                   <h3>40M+ Digital Products</h3>
                   <p>Access our massive library of digital products ready for dropshipping. No need to create products from scratch.</p>
@@ -1318,7 +1504,7 @@
                 </div>
               </div>
               
-              <div class="card fade-in">
+              <div class="card">
                 <div class="inner">
                   <h3>30K+ Mega Reels</h3>
                   <p>Engaging reels that have been proven to drive traffic and increase followers quickly.</p>
@@ -1331,7 +1517,7 @@
                 </div>
               </div>
               
-              <div class="card fade-in">
+              <div class="card">
                 <div class="inner">
                   <h3>Instagram Growth Course</h3>
                   <p>Step-by-step guide to growing your Instagram account organically and rapidly.</p>
@@ -1346,7 +1532,7 @@
             </div>
             
             <div class="pricing" style="margin-top: 30px;">
-              <div class="card fade-in">
+              <div class="card">
                 <div class="inner">
                   <h3>Editing Tools & Templates</h3>
                   <p>Professional templates and tools to create stunning content quickly.</p>
@@ -1359,7 +1545,7 @@
                 </div>
               </div>
               
-              <div class="card premium fade-in">
+              <div class="card premium">
                 <div class="inner">
                   <h3>Resale Rights</h3>
                   <p>Keep 100% profit when you resell our products (available in Advance and Premium plans).</p>
@@ -1372,7 +1558,7 @@
                 </div>
               </div>
               
-              <div class="card fade-in">
+              <div class="card">
                 <div class="inner">
                   <h3>Priority Support</h3>
                   <p>Get help when you need it with our responsive support team.</p>
@@ -1398,7 +1584,7 @@
           <p class="muted">See what our customers are saying about their experience with veyora</p>
           
           <div class="testimonials">
-            <div class="tcard fade-in">
+            <div class="tcard">
               <p>“Hooks are 🔥 — I posted 3 reels and jumped from 2k to 8.7k followers in a week. The dropshipping checklist saved me hours.”</p>
               <div class="tuser">
                 <div class="avatar">A</div>
@@ -1408,7 +1594,7 @@
               </div>
             </div>
             
-            <div class="tcard fade-in">
+            <div class="tcard">
               <p>“Bought premium for the training — literally plug‑and‑play. Resold 11 copies in 3 days. Gained more then 20k followers in just 12 days.”</p>
               <div class="tuser">
                 <div class="avatar">N</div>
@@ -1418,7 +1604,7 @@
               </div>
             </div>
             
-            <div class="tcard fade-in">
+            <div class="tcard">
               <p>“Zero fluff. The ad scripts + product research tips are gold. If you're starting, skip YouTube rabbit holes and get this.”</p>
               <div class="tuser">
                 <div class="avatar">M</div>
@@ -1430,7 +1616,7 @@
           </div>
           
           <div class="testimonials" style="margin-top: 30px;">
-            <div class="tcard fade-in">
+            <div class="tcard">
               <p>“I was skeptical at first, but the results speak for themselves. My engagement tripled in just two weeks using the reels from the Basic package.”</p>
               <div class="tuser">
                 <div class="avatar">P</div>
@@ -1440,7 +1626,7 @@
               </div>
             </div>
             
-            <div class="tcard fade-in">
+            <div class="tcard">
               <p>“The resale rights included in the Advance plan have become a significant income stream for me. I've made back my investment 10x over.”</p>
               <div class="tuser">
                 <div class="avatar">R</div>
@@ -1450,7 +1636,7 @@
               </div>
             </div>
             
-            <div class="tcard fade-in">
+            <div class="tcard">
               <p>“The customer support is exceptional. They helped me set up my first dropshipping store and now I'm making consistent sales.”</p>
               <div class="tuser">
                 <div class="avatar">S</div>
@@ -1461,7 +1647,7 @@
             </div>
           </div>
           
-          <div class="hero-card fade-in" style="margin-top: 40px;">
+          <div class="hero-card" style="margin-top: 40px;">
             <h3>Join Our Success Stories</h3>
             <p>We're proud to have helped thousands of creators and entrepreneurs achieve their goals. Our packages are designed to give you everything you need to succeed in the digital space.</p>
             <div style="text-align: center; margin-top: 20px;">
@@ -1481,65 +1667,65 @@
             <p class="muted">Find answers to common questions about veyora products and services</p>
             
             <div class="faq">
-              <details class="fade-in">
+              <details>
                 <summary>What exactly am I getting in the Basic plan?</summary>
                 <div class="muted">You get the full PDF of drive links for 30K+ 40M+ viral reels.</div>
               </details>
               
-              <details class="fade-in">
+              <details>
                 <summary>What are Resale Rights in the Advance plan?</summary>
                 <div class="muted">You're licensed to resell this e-book and keep 100% profit. You'll also receive editable assets to promote it and Instagram growth course (Do not falsely claim authorship).</div>
               </details>
               
-              <details class="fade-in">
+              <details>
                 <summary>What's extra in Premium?</summary>
                 <div class="muted">Everything in Advance plus a premium bundle viral reels (these reels have 50M+ views) it's easy to go viral with them, pricing, payment links, and traffic to resell effectively.</div>
               </details>
               
-              <details class="fade-in">
+              <details>
                 <summary>How do I get access after payment?</summary>
                 <div class="muted">You'll be redirected to an instant download page and also receive an email with your access link.</div>
               </details>
               
-              <details class="fade-in">
+              <details>
                 <summary>What's your refund policy?</summary>
                 <div class="muted">Digital products are non-refundable. If you have a technical issue, contact support and we'll fix access quickly (3muskuran@gmail.com).</div>
               </details>
               
-              <details class="fade-in">
+              <details>
                 <summary>How often is the content updated?</summary>
                 <div class="muted">We update our content library quarterly to ensure it remains relevant and effective with current trends and algorithm changes.</div>
               </details>
               
-              <details class="fade-in">
+              <details>
                 <summary>Can I upgrade my plan later?</summary>
                 <div class="muted">Yes, you can upgrade at any time. Just contact our support team and we'll help you with the upgrade process.</div>
               </details>
               
-              <details class="fade-in">
+              <details>
                 <summary>Do I need any special software to use the templates?</summary>
                 <div class="muted">Most of our templates are designed for Canva, which is free to use. Some video templates may require basic video editing software.</div>
               </details>
               
-              <details class="fade-in">
+              <details>
                 <summary>Is there a limit to how many times I can use the content?</summary>
                 <div class="muted">No, once you purchase a plan, you have unlimited use of all the content included in your package.</div>
               </details>
               
-              <details class="fade-in">
+              <details>
                 <summary>How do I contact customer support?</summary>
                 <div class="muted">You can reach our support team at 3muskuran@gmail.com. We typically respond within 24 hours.</div>
               </details>
             </div>
             
-            <div class="hero-card fade-in" style="margin-top: 40px;">
+            <div class="hero-card" style="margin-top: 40px;">
               <h3>Still Have Questions?</h3>
               <p>If you couldn't find the answer you're looking for, don't hesitate to reach out to our support team. We're here to help you succeed!</p>
               <div style="text-align: center; margin-top: 20px;">
                 <a class="btn primary" href="#contact">Contact Support</a>
               </div>
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1552,7 +1738,7 @@
             <h2>Contact Us</h2>
             <p class="muted">Have questions or need support? We're here to help you succeed!</p>
             
-            <div class="hero-card fade-in" style="margin-top: 30px;">
+            <div class="hero-card" style="margin-top: 30px;">
               <h3>Get In Touch</h3>
               <p>Whether you have questions about our products, need technical support, or want to share your success story, we'd love to hear from you.</p>
               
@@ -1605,7 +1791,7 @@
               </div>
             </div>
             
-            <div class="hero-card fade-in" style="margin-top: 40px;">
+            <div class="hero-card" style="margin-top: 40px;">
               <h3>Common Support Topics</h3>
               <p>Before contacting us, you might find quick answers to these common topics:</p>
               
@@ -1640,23 +1826,14 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile menu functionality
+    // Mobile menu toggle
     const hamburger = document.getElementById('hamburger-menu');
     const navMenu = document.getElementById('nav-menu');
     
-    if (hamburger && navMenu) {
+    if (hamburger) {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('open');
             navMenu.classList.toggle('active');
-        });
-        
-        // Close menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('open');
-                navMenu.classList.remove('active');
-            });
         });
     }
 
@@ -1674,7 +1851,7 @@
       const mEl = document.getElementById('m');
       const sEl = document.getElementById('s');
       
-      let prevValues = { d: '00', h: '00', m: '00', s: '00' };
+      let lastValues = { d: '00', h: '00', m: '00', s: '00' };
       
       function tick(){
         const now = new Date();
@@ -1687,35 +1864,34 @@
         diff -= m * (1000*60);
         const s = Math.floor(diff / 1000);
         
+        const dStr = String(d).padStart(2,'0');
+        const hStr = String(h).padStart(2,'0');
+        const mStr = String(m).padStart(2,'0');
+        const sStr = String(s).padStart(2,'0');
+        
         // Add flip animation when values change
-        if (dEl && String(d).padStart(2,'0') !== prevValues.d) {
+        if (dStr !== lastValues.d) {
+            dEl.textContent = dStr;
             dEl.classList.add('flip');
             setTimeout(() => dEl.classList.remove('flip'), 500);
         }
-        if (hEl && String(h).padStart(2,'0') !== prevValues.h) {
+        if (hStr !== lastValues.h) {
+            hEl.textContent = hStr;
             hEl.classList.add('flip');
             setTimeout(() => hEl.classList.remove('flip'), 500);
         }
-        if (mEl && String(m).padStart(2,'0') !== prevValues.m) {
+        if (mStr !== lastValues.m) {
+            mEl.textContent = mStr;
             mEl.classList.add('flip');
             setTimeout(() => mEl.classList.remove('flip'), 500);
         }
-        if (sEl && String(s).padStart(2,'0') !== prevValues.s) {
+        if (sStr !== lastValues.s) {
+            sEl.textContent = sStr;
             sEl.classList.add('flip');
             setTimeout(() => sEl.classList.remove('flip'), 500);
         }
         
-        prevValues = { 
-            d: String(d).padStart(2,'0'), 
-            h: String(h).padStart(2,'0'), 
-            m: String(m).padStart(2,'0'), 
-            s: String(s).padStart(2,'0') 
-        };
-        
-        if (dEl) dEl.textContent = prevValues.d;
-        if (hEl) hEl.textContent = prevValues.h;
-        if (mEl) mEl.textContent = prevValues.m;
-        if (sEl) sEl.textContent = prevValues.s;
+        lastValues = { d: dStr, h: hStr, m: mStr, s: sStr };
       }
       tick();
       setInterval(tick, 1000);
@@ -1729,11 +1905,14 @@
       if (pricing) {
         const rect = pricing.getBoundingClientRect();
         const nearPricing = rect.top < window.innerHeight && rect.bottom > 0;
-        if (wide || nearPricing) {
-            sticky.classList.remove('visible');
-        } else {
-            sticky.classList.add('visible');
-        }
+        sticky.classList.toggle('hide-sticky', wide || nearPricing);
+      }
+      
+      // Show/hide sticky based on scroll position
+      if (window.scrollY > 500) {
+        sticky.classList.add('visible');
+      } else {
+        sticky.classList.remove('visible');
       }
     }
     updateSticky();
@@ -1769,6 +1948,12 @@
           navLink.classList.remove('active');
         });
         this.classList.add('active');
+        
+        // Close mobile menu if open
+        if (navMenu.classList.contains('active')) {
+            hamburger.classList.remove('open');
+            navMenu.classList.remove('active');
+        }
       });
     });
 
@@ -1796,6 +1981,9 @@
           'contact': 'Contact - veyora'
         };
         document.title = pageTitles[pageId] || 'veyora';
+        
+        // Trigger animations for elements in the new page
+        setTimeout(initAnimations, 100);
       }
     }
 
@@ -1823,6 +2011,34 @@
     
     // Initial page load
     handleHash();
+
+    // Scroll animations
+    function initAnimations() {
+      const animatedElements = document.querySelectorAll('.section, .card, .tcard');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      animatedElements.forEach(el => {
+        observer.observe(el);
+      });
+    }
+    
+    // Initialize animations on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      initAnimations();
+      
+      // Animate hero section
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        hero.classList.add('visible');
+      }
+    });
 
     // Contact form submission handler with Formspree integration
     const complaintForm = document.getElementById('complaintForm');
@@ -1904,26 +2120,6 @@
         }
       });
     }
-
-    // Scroll animations
-    function checkScroll() {
-        const elements = document.querySelectorAll('.fade-in');
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementBottom = element.getBoundingClientRect().bottom;
-            const isVisible = (elementTop < window.innerHeight - 50) && (elementBottom > 0);
-            
-            if (isVisible) {
-                element.classList.add('visible');
-            }
-        });
-    }
-    
-    // Initial check
-    checkScroll();
-    
-    // Check on scroll
-    window.addEventListener('scroll', checkScroll);
   </script>
 </body>
 </html>
